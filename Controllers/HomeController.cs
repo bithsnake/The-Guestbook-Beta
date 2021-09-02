@@ -7,8 +7,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Kursmoment3.DataAccess;
+using Microsoft.AspNetCore.Authorization;
+
 namespace Kursmoment3.Controllers
 {
+    /*
+        För att kunna använda något överhuvudaget i denna controller så måste användaren vara authentiserad, därav attributen "Authorize".
+    Annars blir användaren länkad till login rutan igen
+        */
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -23,10 +30,6 @@ namespace Kursmoment3.Controllers
             _db = db;
         }
 
-        public IActionResult Login()
-        {
-            return View();
-        }
         public IActionResult Index()
         {
             return View();

@@ -32,6 +32,7 @@ namespace Kursmoment3
             );
 
             services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,16 +52,15 @@ namespace Kursmoment3
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    //pattern: "{controller=Home}/{action=Login}/{id?}"); /*Kommer bygga login på en kopia av detta projekt istället*/
-                    //pattern: "{controller=Home}/{action=Index}/{id?}");
-                    pattern: "{controller=GuestBook}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

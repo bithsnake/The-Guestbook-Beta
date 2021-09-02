@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Kursmoment3.DataAccess;
 using System.Dynamic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Kursmoment3.Controllers
 {
+    [Authorize]
     public class GuestBookController : Controller
     {
         private readonly ApplicationDbContext _db;

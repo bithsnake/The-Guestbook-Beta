@@ -11,6 +11,10 @@ a.navbar-brand {
 a {
     color: #ffffff;
 }
+a:hover {
+    color: #ffffff;
+    text-decoration:none;
+}
 
 .btn-primary {
   color: #fff;
@@ -61,6 +65,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  font-family: "Roboto", sans-serif;
 }
 .footer {
   position: absolute;
@@ -69,3 +74,33 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+/* för tab control*/
+div.login-logout-tab div.card-header{
+    padding: 0px 0px 12px 0px;
+}
+
+div.login-logout-tab ul.nav-tabs{
+    margin: 0px 0px -12px 0px;
+}
+
+div.login.logout-tab li.nav-item {
+    width: 50%;
+}
+
+div.login-logout-tab a.nav-link {
+    font-size: 1.5rem;
+    color: #495057;
+    text-align: center;
+}
+
+div.card-content {
+    padding: 10px 20px;
+}
+
+/* för login form*/
+div.login-form-icon {
+    text-align: center;
+}
+/*.active{
+    background-color: white;
+}*/
