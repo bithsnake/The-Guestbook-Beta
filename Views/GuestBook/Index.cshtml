@@ -1,0 +1,105 @@
+﻿
+@model Kursmoment3.Models.ViewModel
+
+@{
+    ViewBag.Title = "GuestBook / Klotterplanket";
+}
+
+<h2>@ViewBag.Message</h2>
+@* The Ienumerable interface lets us iterate through a collection of the type specified between the <> brackets. Otherwise the foreach loop will not work down below *@
+
+<h1 class="text-primary border-bottom border-info">Free Message Board / Klotterplanket</h1>
+<br />
+<br />
+
+<section class="container p-3">
+    <div class="row pt-4">
+        @* If the amount of List of models of type "Message" is over 0 then return the html with the content in the properties specified down below, otherwise, show html after the else clause *@
+        <div class="col-6">
+            @if (Model.MessageList.Count() > 0)
+            {
+                @foreach (var message in Model.MessageList)
+                {
+                    
+                    <div>
+                        <hr />
+                        @* Get the id of the message, used to send the ID to the post method parameter in the "GuestBookController" *@
+                        <input asp-for="@message.ID" hidden />
+                        <h3 width="50%" class="text-primary"><i class="fas fa-user"></i> &nbsp; @message.UserName</h3>
+                        <p class="text-dark font-italic font-weight-light" style="font-size:smaller">Skriven: @message.date</p>
+                        <p width="30%">@message.UserMessage</p>
+
+                        <form method="post" class="btn-group w-50" role="group">
+                            <a class="btn btn-primary mx-2 rounded" asp-controller="GuestBook" asp-route-Id="@message.ID" asp-action="EditMessage"><i class="fas fa-edit"></i></a>
+                            <button onclick="window.preventDefault" type="submit" class="btn btn-danger  mx-2 rounded" asp-controller="GuestBook" asp-route-Id="@message.ID" asp-action="DeleteMessageConfirm"> <i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </div>
+                }
+            }
+            else
+            {
+                <div>
+                    <h3 class="text-primary">Oops..</h3>
+                    <p>Det var tomt här.. :/</p>
+                </div>
+            }
+            <a id="bottom" ></a>
+            @* NYTT INLÄGG *@
+            <button href="#Top" asp-controller="GuestBook" type="button" class="btn btn-primary fixed-top mx-4" data-toggle="modal" data-target="#exampleModalCenter"><a href="#Top"><i class="fas fa-plus"></i> &nbsp; Nytt Meddelande</a></button>
+            @* MODAL FÖR NYTT INLÄGG *@
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-pencil"></i>&nbsp; Skriv meddelande</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" asp-action="Create">
+                            <div class="modal-body">
+
+                                <div class="col-4">
+                                    <label asp-for="UserName"></label>
+                                </div>
+
+                                <div class="col-8">
+                                    <input asp-for="UserName" class="form-control" value="" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                                <div class="col-4 ">
+                                    <label asp-for="UserMessage"></label>
+                                </div>
+                                <div class="col-8">
+                                    @* Binds the input to the UserMessage property in the model defined in line 1 on the @model "ModelCreatedAsAClass" *@
+                                    <textarea rows="6" asp-for="UserMessage" class="form-control"> </textarea>
+                                    <span asp-validation-for="UserMessage" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button asp-action="Index" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button href="#Top" type="submit"  class="btn btn-primary w-100"><i class="far fa-plus-square"></i> &nbsp; Skapa</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</section>
+
+@section scripts {
+
+    <script>
+        window.onsubmit = function (e) {
+        }
+    </script>
+    
+    @* Client side validation, that hits before the backend validation *@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

@@ -1,0 +1,75 @@
+﻿@model Kursmoment3.Models.Message
+
+
+@* 
+    OBS: DET HÄR ÄR ÄNDRAT OCH ANVÄNDS INTE LÄNGRE. JAG ANVÄNDER ALLT DETTA I EN MODAL I INDEX.CSHTML ISTÄLLET.    
+*@
+
+@* All the asp-for tags on the inputs binds their respective values to the properties to the Model "Messages" properties *@
+@* All the asp-for tags on the labels are derived from the Model "Messages" Properties but are using the attribute [DisplayName("PsuedoName") defined in the Models properties] *@
+
+@* When the form excecutes a post method, it will look for post action method of CREATE  *@
+<form method="post" asp-action="Create">
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Add Message</h2>
+        </div>
+        @* "ModelOnly"" shows the validation error message only by the actual field using the respektive models data annotations, All" shows the error message in the top of the html element *@
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div> 
+        <div class="row">
+            <div class="col-8">
+                @* NAME *@
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="UserName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                @* MESSAGE *@
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="UserMessage"></label>
+                    </div>
+                    <div class="col-8">
+                        @* Binds the input to the UserMessage property in the model defined in line 1 on the @model "ModelCreatedAsAClass" *@
+                        <input asp-for="UserMessage" class="form-control" />
+                        <span asp-validation-for="UserMessage" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                @* BUTTONS *@
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+                        @* CREATE MESSAGE BUTTON *@
+                        <div class="col">
+                            @* When submitted, it runts the forms POST *@
+                            <input type="submit" value="Skapa" class="btn btn-info w-100" />
+                        </div>
+                        @* GO BACK BUTTON *@
+                        <div class="col">
+                            <a class="btn btn-success w-100" asp-action="Index">Gå tillbaka</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    @* Keep this empty *@
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts { 
+    @* Client side validation, that hits before the backend validation *@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

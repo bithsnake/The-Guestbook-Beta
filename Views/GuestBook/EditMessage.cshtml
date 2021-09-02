@@ -1,0 +1,70 @@
+﻿@model Kursmoment3.Models.Message
+@* All the asp-for tags on the inputs binds their respective values to the properties to the Model "Messages" properties *@
+@* All the asp-for tags on the labels are derived from the Model "Messages" Properties but are using the attribute [DisplayName("PsuedoName") defined in the Models properties] *@
+
+@* When the form excecutes a post method, it will look for post action method of CREATE  *@
+<form method="post">
+    @* Using the id of the specific message and adding the ID instead of the whole object, and keeping this input hidden *@
+    <input asp-for="ID" hidden/> 
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Edit Message</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-8">
+                @* NAME *@
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="UserName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                @* MESSAGE *@
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="UserMessage"></label>
+                    </div>
+                    <div class="col-8">
+                        @* Binds the input to the UserMessage property in the model defined in line 1 on the @model "ModelCreatedAsAClass" *@
+                        <input asp-for="UserMessage" class="form-control" />
+                        <span asp-validation-for="UserMessage" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                @* BUTTONS *@
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+                        @* CHANGE MESSAGE BUTTON *@
+                        <div class="col">
+                            @* When submitted, it runts the forms POST *@
+                            <button type="submit" class="btn btn-info w-100"> <i class="fas fa-edit"></i> &nbsp; Uppdatera</button>
+                        </div>
+                        @* GO BACK BUTTON *@
+                        <div class="col">
+                            <a class="btn btn-success w-100" asp-action="Index"><i class="fas fa-sign-out-alt"></i> &nbsp; Gå tillbaka</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    @* Keep this empty *@
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @* Client side validation, that hits before the backend validation *@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
