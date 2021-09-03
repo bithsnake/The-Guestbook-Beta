@@ -1,0 +1,105 @@
+﻿
+@model Kursmoment3.Models.ForumViewModel
+
+@{
+    ViewBag.Title = "Forum";
+}
+
+<h2>@ViewBag.Message</h2>
+<section style="color:ghostwhite; " class="container p-3 shadow-lg rounded">
+    <h1 class="text-dark border-bottom border-info">❝@Model.Topicobject.ForumTopic❞</h1>
+    <div class="row pt-4 text-dark">
+        <p>@Model.Topicobject.ForumTopicDescription</p>
+        <p class="font-italic">Skapad av: @Model.User @Model.Topicobject.date</p>
+    </div>
+</section>
+<div class=" ">
+    @* NYTT INLÄGG *@
+    <div class="row pt-4">
+        <div class="col">
+            @if (Model.PostList.Count() > 0)
+            {
+                @foreach (var post in Model.PostList)
+                {
+
+                    <div>
+                        <hr />
+                        @* Get the id of the message, used to send the ID to the post method parameter in the "GuestBookController" *@
+                        <input asp-for="@post.PostID" hidden />
+                        <h3 width="50%" class="text-primary"><i class="fas fa-folder"></i> &nbsp; @post.UserPost</h3>
+                        <p class="text-dark font-italic font-weight-light" style="font-size:smaller">Skapad av: @post.Date</p>
+                        <p width="30%">@post.UserPost</p>
+
+                        <form class="offset-md-3" method="post" class="btn-group w-50" role="group">
+                            @*<a class="btn btn-primary mx-2 rounded" asp-controller="Forum" asp-route-Id="@topic.ID" asp-action=""><i class="fas fa-edit"></i></a>*@
+                            @*<button onclick="window.preventDefault" type="submit" class="btn btn-danger  mx-2 rounded w-25" asp-controller="Forum" asp-route-Id="@post.PostID" asp-action=""> <i class="fas fa-trash-alt"></i></button>*@
+                        </form>
+                    </div>
+                }
+            }
+            else
+            {
+                <div>
+                    <h3 class="text-primary">Oops..</h3>
+                    <p>Det var tomt här.. :/</p>
+                </div>
+            }
+            <a id="bottom"></a>
+            <button href="#Top" asp-controller="Forum" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-plus"></i> &nbsp; Nytt Inlägg</button>
+            @* MODAL FÖR NYTT INLÄGG *@
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-pencil"></i>&nbsp; Ämne</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" asp-action="CreatePost">
+                            <div class="modal-body">
+
+                                <div class="col-4">
+                                    <label asp-for="UserPost"></label>
+                                </div>
+
+                                <div class="col-8">
+                                    <input asp-for="UserPost" class="form-control" value="" />
+                                    <span asp-validation-for="UserPost" class="text-danger"></span>
+                                </div>
+
+                                <!--<div class="col-4 ">
+                                    <label asp-for="UserMessage"></label>
+                                </div>
+                                <div class="col-8">-->
+                                @* Binds the input to the UserMessage property in the model defined in line 1 on the @model "ModelCreatedAsAClass" *@
+                                <!--<textarea rows="6" asp-for="UserMessage" class="form-control"> </textarea>
+                                    <span asp-validation-for="UserMessage" class="text-danger"></span>
+                                </div>-->
+
+                            </div>
+                            <div class="modal-footer">
+                                <button asp-action="" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button href="#Top" type="submit" class="btn btn-primary w-100"><i class="far fa-plus-square"></i> &nbsp; Skapa</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+@section scripts {
+
+    <script>
+        window.onsubmit = function (e) {
+        }
+    </script>
+
+    @* Client side validation, that hits before the backend validation *@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

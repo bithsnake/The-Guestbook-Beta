@@ -110,7 +110,7 @@ namespace Kursmoment3.Controllers
             return View(obj);
         }
 
-        // POST - DELETE MESSAGE
+        // POST - DELETE MESSAGE CONFIRM
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteMessageConfirm(int? id)

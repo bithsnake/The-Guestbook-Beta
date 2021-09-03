@@ -58,7 +58,7 @@ namespace Kursmoment3.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             /* 
-                Om användaren försöker att manuellt skriva och gå in på /Identity/Account/Login eller/Identity/Account/Register
+                Om användaren redan är inloggad och försöker att manuellt skriva och gå in på "/Identity/Account/Login" eller "/Identity/Account/Register"
                 i addressfältet så skickas hen till "/" , dvs startsidan.
             */
             if (User.Identity.IsAuthenticated)

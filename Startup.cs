@@ -31,7 +31,8 @@ namespace Kursmoment3
                 Configuration.GetConnectionString("DefaultConnection"))
             );
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+            .AddRazorRuntimeCompilation();
             services.AddRazorPages();
         }
 

@@ -17,5 +17,7 @@ namespace Kursmoment3.DataAccess
         /*Skapa tabellerna i SQL servern med dessa modeller*/
         public DbSet<Person> Person { get; set; }
         public DbSet<Message> Message { get; set; }
+        public DbSet<Topic> Topic { get; set; }
+        public DbSet<Post>  Post { get; set; }
     }
 }
