@@ -23,7 +23,7 @@ namespace Kursmoment3.Controllers
             _db = db;
         }
 
-
+        
         /*The normal view*/
         public IActionResult Index()
         {
