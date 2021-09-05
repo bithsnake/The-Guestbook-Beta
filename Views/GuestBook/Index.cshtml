@@ -6,7 +6,6 @@
 }
 
 <h2>@ViewBag.Message</h2>
-@* The Ienumerable interface lets us iterate through a collection of the type specified between the <> brackets. Otherwise the foreach loop will not work down below *@
 
 <h1 class="text-primary border-bottom border-info">Klotterplanket</h1>
 <br />
@@ -14,16 +13,16 @@
 
 <section class="container p-3">
     <div class="row pt-4">
-        @* If the amount of List of models of type "Message" is over 0 then return the html with the content in the properties specified down below, otherwise, show html after the else clause *@
+        <!-- Om inlägg finns i Model.MessageList som är en lista med referens till antal meddelanden så kommer dom visas, annars visas texten efter else -->
         <div class="col-6">
             @* NYTT INLÄGG *@
             <button onclick="FocusOnTextBox()" href="#Top" asp-controller="GuestBook" type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#exampleModalCenter"><a href="#Top"><i class="fas fa-plus"></i> &nbsp; Nytt Meddelande</a></button>
-            
+
             @if (Model.MessageList.Count() > 0)
             {
                 @foreach (var message in Model.MessageList)
                 {
-                    
+
                     <div>
                         <hr />
                         @* Get the id of the message, used to send the ID to the post method parameter in the "GuestBookController" *@
@@ -46,7 +45,7 @@
                     <p>Det var tomt här.. :/</p>
                 </div>
             }
-            <a id="bottom" ></a>
+            <a id="bottom"></a>
             @* MODAL FÖR NYTT INLÄGG *@
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -80,14 +79,14 @@
                             </div>
                             <div class="modal-footer">
                                 <button asp-action="Index" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button href="#Top" type="submit"  class="btn btn-primary w-100"><i class="far fa-plus-square"></i> &nbsp; Skapa</button>
+                                <button href="#Top" type="submit" class="btn btn-primary w-100"><i class="far fa-plus-square"></i> &nbsp; Skapa</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            
+
         </div>
     </div>
 </section>

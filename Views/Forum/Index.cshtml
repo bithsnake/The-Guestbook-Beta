@@ -6,7 +6,6 @@
 }
 
 <h2>@ViewBag.Message</h2>
-@* The Ienumerable interface lets us iterate through a collection of the type specified between the <> brackets. Otherwise the foreach loop will not work down below *@
 
 <h1 class="text-primary border-bottom border-info">Forum</h1>
 <br />
@@ -16,7 +15,7 @@
     @* NYTT INLÄGG *@
     <button href="#Top" asp-controller="Forum" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-plus"></i> &nbsp; Nytt Ämne</button>
     <div class="row pt-4">
-        @* If the amount of List of models of type "Message" is over 0 then return the html with the content in the properties specified down below, otherwise, show html after the else clause *@
+        <!-- Om inlägg finns i Model.TopicList som är en lista med referens till antal Topic så kommer dom visas, annars visas texten efter else -->
         <div class="col-6">
             @if (Model.TopicList.Count() > 0)
             {

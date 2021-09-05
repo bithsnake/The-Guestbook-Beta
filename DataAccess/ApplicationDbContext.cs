@@ -14,7 +14,7 @@ namespace Kursmoment3.DataAccess
         {
 
         }
-        /*Skapa tabellerna i SQL servern med dessa modeller*/
+        //Här skapas ett så kallat Dbset för alla modeller som sedan migreras till databasen
         public DbSet<Person> Person { get; set; }
         public DbSet<Message> Message { get; set; }
         public DbSet<Topic> Topic { get; set; }

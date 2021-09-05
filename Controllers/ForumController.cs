@@ -10,6 +10,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Kursmoment3.Areas.Identity;
+/*
+    Den här kontrollern tar hand om allt som händer i forumet dvs läsa topics och poster. Härifrån visas även Topic vyerna "View"
+ */
 namespace Kursmoment3.Controllers
 {
     [Authorize]
@@ -25,35 +28,33 @@ namespace Kursmoment3.Controllers
             _usermanager = usermanager;
 
         }
+
+        //Detta är startsidan för Forumet
         /// <summary>
         /// Topic Page View
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
-            IEnumerable<Topic> obj = _db.Topic; // assign the messageList that is a IEnumerable of type Message and store all the _db.Message table into this object
+            IEnumerable<Topic> obj = _db.Topic; // Här lägger jag Topic som en Ienumerable så att jag kan köra en foreach loop på alla Topics som hämtas från databasen.
             ForumViewModel mymodel = new()
             {
                 //ändrar ordningen så att senaste inlägget kommer först, iom det är ett klotterplank
                 TopicList = obj.Reverse()
             };
-            Console.WriteLine($"Current user logged in: {User.Identity.Name}");
             return View(mymodel);
         }
         
+        //Här skapar jag en egen model som jag matar in data i ForumViewModel för att kunna ta del av data från Post + Topic modellen genom att använda mig av ID jag får via parametern.
         /// <summary>
         /// Topic Page View
         /// </summary>
         /// <returns></returns>
         public IActionResult Topic(int? ID)
         {
-            IEnumerable<Post> obj = _db.Post; // assign the messageList that is a IEnumerable of type Message and store all the _db.Message table into this object
+            IEnumerable<Post> obj = _db.Post; 
             Topic topic = _db.Topic.Find(ID);
-            Kursmoment3User topicCreator = new Kursmoment3User();
-            topicCreator = _userdb.Users.Find(topic.CreatedBy);
-            
             ForumViewModel mymodel = new ForumViewModel();
-            mymodel.User = topicCreator;
             mymodel.CreatedByUser = topic.CreatedBy;
             mymodel.Topicobject = topic;
             mymodel.PostList = obj;
@@ -66,8 +67,8 @@ namespace Kursmoment3.Controllers
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        [HttpPost] /*HttpPost attribute has to be used for asp dotnet to know that this is a POST request*/
-        [ValidateAntiForgeryToken] /*This attribute helps defend against cross-site request forgery.*/
+        [HttpPost] 
+        [ValidateAntiForgeryToken] /* Denna attribut validerar post requesten för att undvika så kallad "cross-site request forgery".*/
         public IActionResult CreateTopic(Topic obj)
         {
             if (ModelState.IsValid) //Validate the model state, ie, no empty topics allowed
@@ -92,8 +93,8 @@ namespace Kursmoment3.Controllers
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        [HttpPost] /*HttpPost attribute has to be used for asp dotnet to know that this is a POST request*/
-        [ValidateAntiForgeryToken] /*This attribute helps defend against cross-site request forgery.*/
+        [HttpPost] 
+        [ValidateAntiForgeryToken] 
         public IActionResult CreatePost(int? ID , Post obj)
         {
             if (ModelState.IsValid) //Validate the model state, ie, no empty topics allowed
@@ -160,6 +161,7 @@ namespace Kursmoment3.Controllers
             return RedirectToAction("Index");
         }
 
+        //Denna metod tar alla Post'er från databasen så att man akn foreach loopa igenom alla på sidan
         /// <summary>
         /// Topic Sub-page
         /// </summary>
@@ -167,10 +169,10 @@ namespace Kursmoment3.Controllers
         public IActionResult TopicPosts()
         {
             IEnumerable<Post> obj = _db.Post;
-       
+
             ForumViewModel mymodel = new ForumViewModel
             {
-                PostList = obj.Reverse()
+                PostList = obj
             };
             return View(mymodel);
         }

@@ -1,13 +1,9 @@
 ﻿@model Kursmoment3.Models.Message
-@* All the asp-for tags on the inputs binds their respective values to the properties to the Model "Messages" properties *@
-@* All the asp-for tags on the labels are derived from the Model "Messages" Properties but are using the attribute [DisplayName("PsuedoName") defined in the Models properties] *@
-
-@* When the form excecutes a post method, it will look for post action method of CREATE  *@
-
 
 <!-- OBS!! DEN HÄR KOMMER ATT TAS BORT DÅ JAG INTE TYCKER ATT MAN SKA KUNNA REDIGERA INLÄGG PÅ KLOTTERPLANKET MEN JAG BEHÅLLER VIEW'EN ÄN SÅLÄNGE'-->
+<!-- Här behöver jag inte lägga till en as-action="" i och med att vyn/view heter samma som metoden i GuestBookController, där metoden också heter EditMessage() -->
 <form method="post">
-    @* Using the id of the specific message and adding the ID instead of the whole object, and keeping this input hidden *@
+    @* här skickas Id't med i den dolda inputten genom att använda sig utab asp-taggen asp-for *@
     <input asp-for="ID" hidden/> 
     <div class="border p-3">
         <div class="form-group row">
@@ -34,7 +30,6 @@
                         <label asp-for="UserMessage"></label>
                     </div>
                     <div class="col-8">
-                        @* Binds the input to the UserMessage property in the model defined in line 1 on the @model "ModelCreatedAsAClass" *@
                         <input asp-for="UserMessage" class="form-control" />
                         <span asp-validation-for="UserMessage" class="text-danger"></span>
                     </div>
@@ -46,7 +41,7 @@
                     <div class="col-8 offset-4 row">
                         @* CHANGE MESSAGE BUTTON *@
                         <div class="col">
-                            @* When submitted, it runts the forms POST *@
+                            @* When submitted, it runs the forms POST *@
                             <button type="submit" class="btn btn-info w-100"> <i class="fas fa-edit"></i> &nbsp; Uppdatera</button>
                         </div>
                         @* GO BACK BUTTON *@

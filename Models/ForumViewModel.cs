@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+//Den här modellen används för att lagra data från modeller som är relevanta för forumet
 
 namespace Kursmoment3.Models
 {
