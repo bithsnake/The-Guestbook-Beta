@@ -22,6 +22,7 @@ namespace Kursmoment3.Areas.Identity
 
                 services.AddDefaultIdentity<Kursmoment3User>(options =>
                 {
+                    /* Här ställer man in om mail bekräftelse och och lösneords kriterier*/
                     options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;

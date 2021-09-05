@@ -26,17 +26,18 @@
                     <div>
                         <hr />
                         @* Get the id of the message, used to send the ID to the post method parameter in the "GuestBookController" *@
-                        <input asp-for="@topic.ID" hidden />
                         <ul class="navbar-nav">
                             <li class="text-decoration-none nav-item ">
+                                <input asp-for="@topic.ID" hidden />
                                 <a class="nav-link text-primary" asp-area="" asp-controller="Forum" asp-action="Topic" asp-route-Id="@topic.ID"><i class="fas fa-folder"></i> &nbsp; @topic.ForumTopic</a>
                             </li>
                         </ul>
                         @*<h3 width="50%" class="text-primary"><i class="fas fa-folder"></i> &nbsp; @topic.ForumTopic</h3>*@
-                        <p class="text-dark font-italic font-weight-light" style="font-size:smaller">Skapad av: @topic.date</p>
+                        <p class="text-dark font-italic font-weight-light" style="font-size:smaller">Skapad av: @topic.CreatedBy @topic.Date</p>
 
                         <form class="offset-md-3" method="post" class="btn-group w-50" role="group">
-                            @*<a class="btn btn-primary mx-2 rounded" asp-controller="Forum" asp-route-Id="@topic.ID" asp-action=""><i class="fas fa-edit"></i></a>*@
+                            <input asp-for="@topic.ID" hidden />
+                            @*<a  class="btn btn-primary mx-2 rounded" asp-controller="Forum" asp-route-Id="@topic.ID" asp-action=""><i class="fas fa-edit"></i></a>*@
                             <button onclick="window.preventDefault" type="submit" class="btn btn-danger  mx-2 rounded w-25" asp-controller="Forum" asp-route-Id="@topic.ID" asp-action="DeleteTopicConfirm"> <i class="fas fa-trash-alt"></i></button>
                         </form>
                     </div>

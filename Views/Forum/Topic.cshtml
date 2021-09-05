@@ -5,12 +5,18 @@
     ViewBag.Title = "Forum";
 }
 
+<!-- Här kommer jag senare att köra med regular expressions för att hitta urler i huvudinlägget och kommentarer och göra dom klickabara -->
+
 <h2>@ViewBag.Message</h2>
-<section style="color:ghostwhite; " class="container p-3 shadow-lg rounded">
+<div class="row navbar">
+    <a class="nav-link text-primary" asp-controller="Forum" asp-action="Index"><i class="fas fa-backward"></i> &nbsp; Tillbaka</a>
+</div>
+<section style="background-color:ghostwhite; " class="container p-3 shadow-lg rounded">
+    <h3 width="50%" class="text-primary"><i class="fas fa-user"></i> &nbsp; @Model.Topicobject.CreatedBy.Split("@")[0]</h3>
     <h1 class="text-dark border-bottom border-info">❝@Model.Topicobject.ForumTopic❞</h1>
-    <div class="row pt-4 text-dark">
+    <div class="row p-4 text-dark">
         <p>@Model.Topicobject.ForumTopicDescription</p>
-        <p class="font-italic">Skapad av: @Model.User @Model.Topicobject.date</p>
+        <p class="font-italic">Skapad av: @Model.Topicobject.CreatedBy @Model.Topicobject.Date</p>
     </div>
 </section>
 <div class=" ">
@@ -21,20 +27,22 @@
             {
                 @foreach (var post in Model.PostList)
                 {
+                    if(post.TOPIC_ID == Model.Topicobject.ID)
+                    {
+                        <div>
+                            <hr />
+                            @* Get the id of the message, used to send the ID to the post method parameter in the "GuestBookController" *@
+                            <input asp-for="@post.PostID" hidden />
+                            <h3 width="50%" class="text-primary"><i class="fas fa-user"></i> &nbsp; @post.PostCreatedBy.Split("@")[0]</h3>
+                            <p width="30%">@post.UserPost</p>
+                            <p class="text-dark font-italic font-weight-light" style="font-size:smaller">Skapad av: @post.PostCreatedBy @post.Date</p>
 
-                    <div>
-                        <hr />
-                        @* Get the id of the message, used to send the ID to the post method parameter in the "GuestBookController" *@
-                        <input asp-for="@post.PostID" hidden />
-                        <h3 width="50%" class="text-primary"><i class="fas fa-folder"></i> &nbsp; @post.UserPost</h3>
-                        <p class="text-dark font-italic font-weight-light" style="font-size:smaller">Skapad av: @post.Date</p>
-                        <p width="30%">@post.UserPost</p>
-
-                        <form class="offset-md-3" method="post" class="btn-group w-50" role="group">
-                            @*<a class="btn btn-primary mx-2 rounded" asp-controller="Forum" asp-route-Id="@topic.ID" asp-action=""><i class="fas fa-edit"></i></a>*@
-                            @*<button onclick="window.preventDefault" type="submit" class="btn btn-danger  mx-2 rounded w-25" asp-controller="Forum" asp-route-Id="@post.PostID" asp-action=""> <i class="fas fa-trash-alt"></i></button>*@
-                        </form>
-                    </div>
+                            <!--<form class="offset-md-3" method="post" class="btn-group w-50" role="group">-->
+                                @*<a class="btn btn-primary mx-2 rounded" asp-controller="Forum" asp-route-Id="@topic.ID" asp-action=""><i class="fas fa-edit"></i></a>*@
+                                @*<button onclick="window.preventDefault" type="submit" class="btn btn-danger  mx-2 rounded w-25" asp-controller="Forum" asp-route-Id="@post.PostID" asp-action=""> <i class="fas fa-trash-alt"></i></button>*@
+                            <!--</form>-->
+                        </div>
+                    }
                 }
             }
             else
@@ -51,12 +59,13 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-pencil"></i>&nbsp; Ämne</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-pencil"></i>&nbsp; Skriv kommentar</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <form method="post" asp-action="CreatePost">
+                            <input asp-for="ID" hidden/>
                             <div class="modal-body">
 
                                 <div class="col-4">
@@ -64,7 +73,7 @@
                                 </div>
 
                                 <div class="col-8">
-                                    <input asp-for="UserPost" class="form-control" value="" />
+                                    <textarea rows="6" asp-for="UserPost" class="form-control w-100"> </textarea>
                                     <span asp-validation-for="UserPost" class="text-danger"></span>
                                 </div>
 

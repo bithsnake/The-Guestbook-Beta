@@ -3,6 +3,9 @@
 @* All the asp-for tags on the labels are derived from the Model "Messages" Properties but are using the attribute [DisplayName("PsuedoName") defined in the Models properties] *@
 
 @* When the form excecutes a post method, it will look for post action method of CREATE  *@
+
+
+<!-- OBS!! DEN HÄR KOMMER ATT TAS BORT DÅ JAG INTE TYCKER ATT MAN SKA KUNNA REDIGERA INLÄGG PÅ KLOTTERPLANKET MEN JAG BEHÅLLER VIEW'EN ÄN SÅLÄNGE'-->
 <form method="post">
     @* Using the id of the specific message and adding the ID instead of the whole object, and keeping this input hidden *@
     <input asp-for="ID" hidden/> 

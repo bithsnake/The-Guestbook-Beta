@@ -8,7 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Identity;
+using Kursmoment3.Areas.Identity;
 namespace Kursmoment3.Controllers
 {
     [Authorize]
@@ -16,11 +17,13 @@ namespace Kursmoment3.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly Kursmoment3DbContext _userdb;
-
-        public ForumController(ApplicationDbContext db, Kursmoment3DbContext userdb)
+        private readonly UserManager<Kursmoment3User> _usermanager;
+        public ForumController(ApplicationDbContext db, Kursmoment3DbContext userdb, UserManager<Kursmoment3User> usermanager)
         {
             _db = db;
             _userdb = userdb;
+            _usermanager = usermanager;
+
         }
         /// <summary>
         /// Topic Page View
@@ -29,13 +32,15 @@ namespace Kursmoment3.Controllers
         public IActionResult Index()
         {
             IEnumerable<Topic> obj = _db.Topic; // assign the messageList that is a IEnumerable of type Message and store all the _db.Message table into this object
-            ForumViewModel mymodel = new ForumViewModel
+            ForumViewModel mymodel = new()
             {
-                TopicList = obj.Reverse() //ändrar ordningen så att senaste inlägget kommer först, iom det är ett klotterplank
+                //ändrar ordningen så att senaste inlägget kommer först, iom det är ett klotterplank
+                TopicList = obj.Reverse()
             };
+            Console.WriteLine($"Current user logged in: {User.Identity.Name}");
             return View(mymodel);
         }
-
+        
         /// <summary>
         /// Topic Page View
         /// </summary>
@@ -44,14 +49,14 @@ namespace Kursmoment3.Controllers
         {
             IEnumerable<Post> obj = _db.Post; // assign the messageList that is a IEnumerable of type Message and store all the _db.Message table into this object
             Topic topic = _db.Topic.Find(ID);
-            Person user = _db.Person.Find(topic.ID);
             Kursmoment3User topicCreator = new Kursmoment3User();
-            topicCreator = _userdb.Users.Find(user.UserName);
-
+            topicCreator = _userdb.Users.Find(topic.CreatedBy);
+            
             ForumViewModel mymodel = new ForumViewModel();
             mymodel.User = topicCreator;
+            mymodel.CreatedByUser = topic.CreatedBy;
             mymodel.Topicobject = topic;
-            mymodel.PostList = obj.Reverse();
+            mymodel.PostList = obj;
 
             return View(mymodel);
         }
@@ -67,7 +72,8 @@ namespace Kursmoment3.Controllers
         {
             if (ModelState.IsValid) //Validate the model state, ie, no empty topics allowed
             {
-                obj.date = DateTime.Now;
+                obj.CreatedBy = User.Identity.Name;
+                obj.Date = DateTime.Now;
 
                 /*The tag-helpers in the Create.cshtml binds the asp-for="name" with the properties to the model and passed on as a parampeter to this method.*/
                 _db.Topic.Add(obj); /*Add the message to the database in the "Message" table*/
@@ -88,21 +94,30 @@ namespace Kursmoment3.Controllers
         /// <returns></returns>
         [HttpPost] /*HttpPost attribute has to be used for asp dotnet to know that this is a POST request*/
         [ValidateAntiForgeryToken] /*This attribute helps defend against cross-site request forgery.*/
-        public IActionResult CreatePost(Post obj)
+        public IActionResult CreatePost(int? ID , Post obj)
         {
             if (ModelState.IsValid) //Validate the model state, ie, no empty topics allowed
             {
+                obj.PostCreatedBy = User.Identity.Name;
                 obj.Date = DateTime.Now;
-                /*The tag-helpers in the Create.cshtml binds the asp-for="name" with the properties to the model and passed on as a parampeter to this method.*/
+                obj.TOPIC_ID = (int)ID;
                 _db.Post.Add(obj); /*Add the message to the database in the "Message" table*/
                 _db.SaveChanges(); /*Save the changes done on the database*/
                 /*
                     Redirect to the index page when you click submit in the forms and Add the message to the database.
                     Since it is in the same controller , we dont have to define the controller name.
                 */
-                return View();
+                /*
+                    Här anvädner jag RedirectRoute istället för att kunna stanna kvar i samma Topic beorende på ID när man gör en ny post i en topic.
+                 */
+                return RedirectToRoute(new
+                {
+                    controller = "Forum",
+                    action = "Topic",
+                    id = $"{ID}"
+                });
             }
-            return View(obj); ; // gå tillbaka till vyn men behåll värderna
+            return RedirectToAction("Index", obj); // gå tillbaka till vyn men behåll värderna
         }
         /// <summary>
         /// Delete Topic Check

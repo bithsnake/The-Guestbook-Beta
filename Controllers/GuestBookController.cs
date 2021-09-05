@@ -50,6 +50,7 @@ namespace Kursmoment3.Controllers
             if (ModelState.IsValid) //Here we validate the models state by checking if the asp-validation-for tags are sending us a valid flag, these validations has been set in the models properties.
             {
                 obj.date = DateTime.Now;
+                obj.UserName = User.Identity.Name.Split("@")[0]; /* Just nu lyckas jag endast hämta ut email adressen på användare eftersom Identity sparar hela mailadessen i propertyn Name. Jag ska undersöka senare om det går att hämta ut FirstName & LastName som jag själv har skapat som fält i sql databasen.*/
                 /*The tag-helpers in the Create.cshtml binds the asp-for="name" with the properties to the model and passed on as a parampeter to this method.*/
                 _db.Message.Add(obj); /*Add the message to the database in the "Message" table*/
                 _db.SaveChanges(); /*Save the changes done on the database*/

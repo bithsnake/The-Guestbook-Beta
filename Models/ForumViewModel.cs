@@ -13,11 +13,14 @@ namespace Kursmoment3.Models
         public Topic Topicobject { get; set; }
         public IEnumerable<Post> PostList { get; set; }
         public Kursmoment3User User { get; set; }
+        public string CreatedByUser { get; set; }
         public string UserPost { get; set; }
         public ForumViewModel()
         {
             Post post = new Post();
             UserPost = post.UserPost;
+            Topic topic = new Topic();
+            Topicobject = topic;
         }
         
 

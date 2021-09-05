@@ -17,7 +17,7 @@ namespace Kursmoment3.Models
         [ForeignKey("Person")] // Refers to the primary key in the Person Model, and is used when migrating model to the sql server table
         public int ID { get; set; }
 
-        [Required]  //Makes the username field in the message box required
+        //[Required]  //Makes the username field in the message box required
         [DisplayName("Namn")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Ditt namn måste vara mellan 2 - 50 tecken.")]
         [MaxLength(200)]

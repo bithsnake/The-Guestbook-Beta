@@ -17,7 +17,7 @@
         @* If the amount of List of models of type "Message" is over 0 then return the html with the content in the properties specified down below, otherwise, show html after the else clause *@
         <div class="col-6">
             @* NYTT INLÄGG *@
-            <button href="#Top" asp-controller="GuestBook" type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#exampleModalCenter"><a href="#Top"><i class="fas fa-plus"></i> &nbsp; Nytt Meddelande</a></button>
+            <button onclick="FocusOnTextBox()" href="#Top" asp-controller="GuestBook" type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#exampleModalCenter"><a href="#Top"><i class="fas fa-plus"></i> &nbsp; Nytt Meddelande</a></button>
             
             @if (Model.MessageList.Count() > 0)
             {
@@ -32,10 +32,10 @@
                         <p class="text-dark font-italic font-weight-light" style="font-size:smaller">Skriven: @message.date</p>
                         <p width="30%">@message.UserMessage</p>
 
-                        <form method="post" class="btn-group w-50" role="group">
+                        @*<form method="post" class="btn-group w-50" role="group">
                             <a class="btn btn-primary mx-2 rounded" asp-controller="GuestBook" asp-route-Id="@message.ID" asp-action="EditMessage"><i class="fas fa-edit"></i></a>
                             <button onclick="window.preventDefault" type="submit" class="btn btn-danger  mx-2 rounded" asp-controller="GuestBook" asp-route-Id="@message.ID" asp-action="DeleteMessageConfirm"> <i class="fas fa-trash-alt"></i></button>
-                        </form>
+                        </form>*@
                     </div>
                 }
             }
@@ -60,20 +60,20 @@
                         <form method="post" asp-action="Create">
                             <div class="modal-body">
 
-                                <div class="col-4">
+                                @*<div class="col-4">
                                     <label asp-for="UserName"></label>
                                 </div>
 
                                 <div class="col-8">
                                     <input asp-for="UserName" class="form-control" value="" />
                                     <span asp-validation-for="UserName" class="text-danger"></span>
-                                </div>
+                                </div>*@
                                 <div class="col-4 ">
                                     <label asp-for="UserMessage"></label>
                                 </div>
                                 <div class="col-8">
                                     @* Binds the input to the UserMessage property in the model defined in line 1 on the @model "ModelCreatedAsAClass" *@
-                                    <textarea rows="6" asp-for="UserMessage" class="form-control"> </textarea>
+                                    <textarea id="textbox" rows="6" asp-for="UserMessage" class="form-control" autofocus> </textarea>
                                     <span asp-validation-for="UserMessage" class="text-danger"></span>
                                 </div>
 
@@ -91,13 +91,17 @@
         </div>
     </div>
 </section>
-
-@section scripts {
-
     <script>
         window.onsubmit = function (e) {
         }
+
+        function FocusOnTextBox() {
+            document.getElementById("textbox").focus();
+        }
     </script>
+
+@section scripts {
+
     
     @* Client side validation, that hits before the backend validation *@
     @{
