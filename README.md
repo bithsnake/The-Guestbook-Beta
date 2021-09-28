@@ -8,3 +8,5 @@ Sidan är vädligt beta ännu då detta ingick i som ett veckor projekt där vi 
 ![image](https://user-images.githubusercontent.com/39192814/135079417-4e4248a2-000f-491e-b264-df3ad773c2b7.png)
 
 ![image](https://user-images.githubusercontent.com/39192814/135079441-76ad4f9c-8f7d-4fde-9ea8-4da785a9249c.png)
+
+![image](https://user-images.githubusercontent.com/39192814/135080013-2974686b-480d-477e-9c97-4b45d802dee1.png)
