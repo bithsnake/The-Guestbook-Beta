@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Kursmoment3.Migrations
+namespace TheGuestBook.Migrations
 {
     public partial class addedDatetimeOnMessage : Migration
     {

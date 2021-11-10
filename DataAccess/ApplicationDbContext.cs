@@ -1,11 +1,11 @@
-﻿using Kursmoment3.Models;
+﻿using TheGuestBook.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Kursmoment3.DataAccess
+namespace TheGuestBook.DataAccess
 {
     public class ApplicationDbContext : DbContext
     {

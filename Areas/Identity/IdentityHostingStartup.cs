@@ -1,6 +1,6 @@
 ﻿using System;
-using Kursmoment3.Areas.Identity.Data;
-using Kursmoment3.Data;
+using TheGuestBook.Areas.Identity.Data;
+using TheGuestBook.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -8,19 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(Kursmoment3.Areas.Identity.IdentityHostingStartup))]
-namespace Kursmoment3.Areas.Identity
+[assembly: HostingStartup(typeof(TheGuestBook.Areas.Identity.IdentityHostingStartup))]
+namespace TheGuestBook.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<Kursmoment3DbContext>(options =>
+                services.AddDbContext<TheGuestBookDbContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("Kursmoment3DbContextConnection")));
+                        context.Configuration.GetConnectionString("TheGuestBookDbContextConnection")));
 
-                services.AddDefaultIdentity<Kursmoment3User>(options =>
+                services.AddDefaultIdentity<TheGuestBookUser>(options =>
                 {
                     /* Här ställer man in om mail bekräftelse och och lösneords kriterier*/
                     options.SignIn.RequireConfirmedAccount = false;
@@ -28,7 +28,7 @@ namespace Kursmoment3.Areas.Identity
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                 })
-                    .AddEntityFrameworkStores<Kursmoment3DbContext>();
+                    .AddEntityFrameworkStores<TheGuestBookDbContext>();
             
             });
         }

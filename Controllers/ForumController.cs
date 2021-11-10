@@ -1,7 +1,7 @@
-﻿using Kursmoment3.Areas.Identity.Data;
-using Kursmoment3.Data;
-using Kursmoment3.DataAccess;
-using Kursmoment3.Models;
+﻿using TheGuestBook.Areas.Identity.Data;
+using TheGuestBook.Data;
+using TheGuestBook.DataAccess;
+using TheGuestBook.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,19 +9,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Kursmoment3.Areas.Identity;
+using TheGuestBook.Areas.Identity;
 /*
     Den här kontrollern tar hand om allt som händer i forumet dvs läsa topics och poster. Härifrån visas även Topic vyerna "View"
  */
-namespace Kursmoment3.Controllers
+namespace TheGuestBook.Controllers
 {
     [Authorize]
     public class ForumController : Controller
     {
         private readonly ApplicationDbContext _db;
-        private readonly Kursmoment3DbContext _userdb;
-        private readonly UserManager<Kursmoment3User> _usermanager;
-        public ForumController(ApplicationDbContext db, Kursmoment3DbContext userdb, UserManager<Kursmoment3User> usermanager)
+        private readonly TheGuestBookDbContext _userdb;
+        private readonly UserManager<TheGuestBookUser> _usermanager;
+        public ForumController(ApplicationDbContext db, TheGuestBookDbContext userdb, UserManager<TheGuestBookUser> usermanager)
         {
             _db = db;
             _userdb = userdb;

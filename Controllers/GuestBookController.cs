@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Kursmoment3.Models;
+using TheGuestBook.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using Kursmoment3.DataAccess;
+using TheGuestBook.DataAccess;
 using System.Dynamic;
 using Microsoft.AspNetCore.Authorization;
 
 // Här sköts all logic för GuestBook / Klotterplanket. Jag skapar en instans av länken till databasen vilket är ApplicationDbContext och anvnänder mig utav den för att hämta data från servern.
-namespace Kursmoment3.Controllers
+namespace TheGuestBook.Controllers
 {
     [Authorize]
     public class GuestBookController : Controller

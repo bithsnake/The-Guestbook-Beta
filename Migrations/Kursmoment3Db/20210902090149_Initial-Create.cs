@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Kursmoment3.Migrations.Kursmoment3Db
+namespace TheGuestBook.Migrations.TheGuestBookDb
 {
     public partial class InitialCreate : Migration
     {

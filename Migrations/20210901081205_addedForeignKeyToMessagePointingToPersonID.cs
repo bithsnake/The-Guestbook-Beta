@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Kursmoment3.Migrations
+namespace TheGuestBook.Migrations
 {
     public partial class addedForeignKeyToMessagePointingToPersonID : Migration
     {

@@ -1,4 +1,4 @@
-﻿using Kursmoment3.Areas.Identity.Data;
+﻿using TheGuestBook.Areas.Identity.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 //Den här modellen används för att lagra data från modeller som är relevanta för forumet
 
-namespace Kursmoment3.Models
+namespace TheGuestBook.Models
 {
     public class ForumViewModel : Topic
     {
         public IEnumerable<Topic> TopicList { get; set; }
         public Topic Topicobject { get; set; }
         public IEnumerable<Post> PostList { get; set; }
-        public Kursmoment3User User { get; set; }
+        public TheGuestBookUser User { get; set; }
         public string CreatedByUser { get; set; }
         public string UserPost { get; set; }
         public ForumViewModel()

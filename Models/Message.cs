@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 /*
  *  Model will represent a table that we want in our database
 */
-namespace Kursmoment3.Models
+namespace TheGuestBook.Models
 {
     public class Message
     {

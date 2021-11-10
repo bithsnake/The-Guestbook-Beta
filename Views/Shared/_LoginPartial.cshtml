@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using Kursmoment3.Areas.Identity.Data
+@using TheGuestBook.Areas.Identity.Data
 
-@inject SignInManager<Kursmoment3User> SignInManager
-@inject UserManager<Kursmoment3User> UserManager
+@inject SignInManager<TheGuestBookUser> SignInManager
+@inject UserManager<TheGuestBookUser> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))

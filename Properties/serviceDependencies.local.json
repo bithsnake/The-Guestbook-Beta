@@ -2,7 +2,7 @@
   "dependencies": {
     "mssql1": {
       "type": "mssql.local",
-      "connectionId": "ConnectionStrings:Kursmoment3DbContextConnection"
+      "connectionId": "ConnectionStrings:TheGuestBookDbContextConnection"
     }
   }
 }

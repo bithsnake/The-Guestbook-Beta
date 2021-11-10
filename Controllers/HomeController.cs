@@ -1,4 +1,4 @@
-﻿using Kursmoment3.Models;
+﻿using TheGuestBook.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Kursmoment3.DataAccess;
+using TheGuestBook.DataAccess;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Kursmoment3.Controllers
+namespace TheGuestBook.Controllers
 {
     /*
         Startsidan för hemsidan, som inte har något speciellt i sig.

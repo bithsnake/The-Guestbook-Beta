@@ -1,4 +1,4 @@
-using Kursmoment3.DataAccess;
+using TheGuestBook.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Kursmoment3
+namespace TheGuestBook
 {
     public class Startup
     {

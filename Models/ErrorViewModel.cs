@@ -1,6 +1,6 @@
 using System;
 
-namespace Kursmoment3.Models
+namespace TheGuestBook.Models
 {
     public class ErrorViewModel
     {

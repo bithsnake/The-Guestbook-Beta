@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Kursmoment3.Areas.Identity.Data;
+using TheGuestBook.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kursmoment3.Data
+namespace TheGuestBook.Data
 {
-    public class Kursmoment3DbContext : IdentityDbContext<Kursmoment3User>
+    public class TheGuestBookDbContext : IdentityDbContext<TheGuestBookUser>
     {
-        public Kursmoment3DbContext(DbContextOptions<Kursmoment3DbContext> options)
+        public TheGuestBookDbContext(DbContextOptions<TheGuestBookDbContext> options)
             : base(options)
         {
         }

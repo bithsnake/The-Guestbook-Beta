@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 // Denna model används för klotterplanket / The Guestbook som ärver av Message modellen för att kunna använda UserMessage propertien
 // Denna finns att hitta i GuestBookController.cs
-namespace Kursmoment3.Models
+namespace TheGuestBook.Models
 {
     public class ViewModel : Message
     {
